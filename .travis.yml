@@ -3,7 +3,15 @@ language: python
 python:
   - "3.7"
 install:
-- pip install -r requirements.txt
+    - pip install -r requirements.txt
+before_deploy:
+    - rm -rf build
+    - mkdir build
+    - pip install -r requirements.txt -t build
+    - cp -R api build/
+    - cd build
+    - zip -r ../lambda.zip .
+    - cd ..
 script: pytest
 deploy:
   provider: lambda
@@ -11,5 +19,6 @@ deploy:
   region: "eu-north-1"
   role: $ROLE
   runtime: "python3.7"
+  zip: "lambda.zip"
   module_name: api
   handler_name: lambda_handler
