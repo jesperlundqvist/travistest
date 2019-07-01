@@ -14,11 +14,19 @@ before_deploy:
     - cd ..
 script: pytest
 deploy:
-  provider: lambda
-  function_name: "travistest"
-  region: "eu-north-1"
-  role: $ROLE
-  runtime: "python3.7"
-  zip: "lambda.zip"
-  module_name: api
-  handler_name: lambda_handler
+  - provider: lambda
+    function_name: "travistest"
+    region: "eu-north-1"
+    role: $ROLE
+    runtime: "python3.7"
+    zip: "lambda.zip"
+    module_name: api
+    handler_name: lambda_handler
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_ACCESS_KEY
+    bucket: "S3 Bucket"
+    skip_cleanup: true
+    region: "eu-north-1"
+    local_dir: static
+    acl: public_read
