@@ -23,9 +23,9 @@ deploy:
     module_name: api
     handler_name: lambda_handler
   - provider: s3
-    access_key_id: $AWS_ACCESS_KEY
+    access_key_id: $AWS_ACCESS_KEY_ID
     secret_access_key: $AWS_SECRET_ACCESS_KEY
-    bucket: "S3 Bucket"
+    bucket: "travistestmedieteknik"
     skip_cleanup: true
     region: "eu-north-1"
     local_dir: static
