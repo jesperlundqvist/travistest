@@ -11,5 +11,5 @@ deploy:
   region: "eu-north-1"
   role: $ROLE
   runtime: "python3.7"
-  module_name: api/app
-  handler_name: handler
+  module_name: api
+  handler_name: lambda_handler
